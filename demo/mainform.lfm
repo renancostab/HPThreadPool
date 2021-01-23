@@ -1,0 +1,72 @@
+object Form1: TForm1
+  Left = 837
+  Height = 340
+  Top = 385
+  Width = 523
+  Caption = 'High Performance Thread Pool Demo'
+  ClientHeight = 340
+  ClientWidth = 523
+  OnCreate = FormCreate
+  OnDestroy = FormDestroy
+  LCLVersion = '2.0.10.0'
+  object Button1: TButton
+    Left = 395
+    Height = 25
+    Top = 128
+    Width = 75
+    Caption = 'Run'
+    OnClick = Button1Click
+    ParentFont = False
+    TabOrder = 0
+  end
+  object Memo1: TMemo
+    Left = 8
+    Height = 322
+    Top = 8
+    Width = 374
+    Font.CharSet = ANSI_CHARSET
+    Font.Color = clBlack
+    Font.Height = -12
+    Font.Name = 'Lucida Console'
+    Font.Pitch = fpFixed
+    Font.Quality = fqDraft
+    ParentFont = False
+    ReadOnly = True
+    TabOrder = 1
+  end
+  object Button2: TButton
+    Left = 395
+    Height = 25
+    Top = 91
+    Width = 75
+    Caption = 'Increment'
+    OnClick = Button2Click
+    ParentFont = False
+    TabOrder = 2
+  end
+  object Button3: TButton
+    Left = 395
+    Height = 25
+    Top = 168
+    Width = 75
+    Caption = 'Wait All'
+    OnClick = Button3Click
+    TabOrder = 3
+  end
+  object Button4: TButton
+    Left = 395
+    Height = 25
+    Top = 56
+    Width = 75
+    Caption = 'Decrement'
+    OnClick = Button4Click
+    ParentFont = False
+    TabOrder = 4
+  end
+  object Timer1: TTimer
+    Enabled = False
+    OnTimer = Timer1Timer
+    Left = 480
+    Top = 8
+  end
+end
