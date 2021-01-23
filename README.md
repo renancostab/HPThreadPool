@@ -11,10 +11,10 @@ HPThreadPool is a High Performance Thread Pool design for Lazarus Free pascal
 The goal is to provide a nice and simple way to work with threads without the excessive overhead of runtime thread creation, the major topics of a thread pool is covered, including: 
  
   - Statics
-   - Minimum 
-   - Maximum 
-   - Threads running
-   - Work enqueued
+    - Minimum 
+    - Maximum 
+    - Threads running
+    - Work enqueued
   - Resize of thread pool
   - Zero sleep time when a job is available
   - WaitForAll and WaitForAny
