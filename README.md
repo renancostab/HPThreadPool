@@ -1,3 +1,7 @@
+![Version](https://img.shields.io/badge/version-v1.0-yellow.svg)
+![License](https://img.shields.io/github/license/renancostab/HPThreadPool.svg)
+![Lang](https://img.shields.io/github/languages/top/renancostab/HPThreadPool.svg)
+
 # HPThreadPool
 
 HPThreadPool is a High Performance Thread Pool design for Lazarus Free pascal
