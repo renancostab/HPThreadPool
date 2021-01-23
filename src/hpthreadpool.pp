@@ -84,8 +84,8 @@ type
     class function Run(AWork: TWorkMethod; AParameters: Pointer; APool: THPThreadPool = nil): IHPTask;
     class function Run(AWork: TWorkProcedure; AParameters: Pointer; APool: THPThreadPool = nil): IHPTask;
 
-    class function WaitForAll(ATasks: TTaskArray; ATimeout: Cardinal = INFINITE): Boolean;
-    class function WaitForAny(ATasks: TTaskArray; ATimeout: Cardinal = INFINITE): Boolean;
+    class function WaitForAll(const ATasks: TTaskArray; ATimeout: Cardinal = INFINITE): Boolean;
+    class function WaitForAny(const ATasks: TTaskArray; ATimeout: Cardinal = INFINITE): Boolean;
   end;
 
 implementation
@@ -274,7 +274,7 @@ begin
   Result := Wait(INFINITE);
 end;
 
-class function THPTask.WaitForAll(ATasks: TTaskArray; ATimeout: Cardinal): Boolean;
+class function THPTask.WaitForAll(const ATasks: TTaskArray; ATimeout: Cardinal): Boolean;
 var
   Task: IHPTask;
 begin
@@ -286,7 +286,7 @@ begin
   end;
 end;
 
-class function THPTask.WaitForAny(ATasks: TTaskArray; ATimeout: Cardinal): Boolean;
+class function THPTask.WaitForAny(const ATasks: TTaskArray; ATimeout: Cardinal): Boolean;
 var
   I: Integer;
   Task: THPTask;

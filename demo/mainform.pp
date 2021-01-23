@@ -24,12 +24,14 @@ type
     Button2: TButton;
     Button3: TButton;
     Button4: TButton;
+    Button5: TButton;
     Memo1: TMemo;
     Timer1: TTimer;
     procedure Button1Click(Sender: TObject);
     procedure Button2Click(Sender: TObject);
     procedure Button3Click(Sender: TObject);
     procedure Button4Click(Sender: TObject);
+    procedure Button5Click(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
     procedure Timer1Timer(Sender: TObject);
@@ -69,7 +71,7 @@ begin
   for I := 0 to Random(30) do
     Tasks.Add(THPTask.Run(@MyWork, nil));
 
-  THPTask.WaitForAny(Tasks.ToArray);
+  THPTask.WaitForAll(Tasks.ToArray);
 
   Tasks.Free;
 end;
@@ -77,6 +79,20 @@ end;
 procedure TForm1.Button4Click(Sender: TObject);
 begin
   THPThreadPool.DefaultPool.MaxThreads := THPThreadPool.DefaultPool.MaxThreads - 1;
+end;
+
+procedure TForm1.Button5Click(Sender: TObject);
+var
+  I: Integer;
+  Tasks: TTaskList;
+begin
+  Tasks := TTaskList.Create;
+  for I := 0 to Random(30) do
+    Tasks.Add(THPTask.Run(@MyWork, nil));
+
+  THPTask.WaitForAny(Tasks.ToArray);
+
+  Tasks.Free;
 end;
 
 procedure TForm1.FormCreate(Sender: TObject);
