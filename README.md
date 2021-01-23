@@ -40,11 +40,11 @@ implementation
 
 procedure TMyJobs.MyFiboWork(AParameters: Pointer);
 var
- I: Integer;
- Value: Integer; 
- Sum: Integer = 0;
- NumA: Integer = 1;
- NumB: Integer = 0;
+  I: Integer;
+  Value: Integer; 
+  Sum: Integer = 0;
+  NumA: Integer = 1;
+  NumB: Integer = 0;
 begin
   Value := PInteger(AParameters)^;
   for I := 0 to Value do
