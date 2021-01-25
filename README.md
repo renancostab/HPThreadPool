@@ -47,12 +47,14 @@ var
   NumB: Integer = 0;
 begin
   Value := PInteger(AParameters)^;
+  
   for I := 0 to Value do
   begin
     Sum := NumA + NumB;
     NumB := NumA;
     NumA := Sum;
   enbd;
+  
   PInteger(AParameters)^ := Sum;
 end;
  
