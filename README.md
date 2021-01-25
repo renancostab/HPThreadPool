@@ -48,7 +48,7 @@ var
 begin
   Value := PInteger(AParameters)^;
   
-  for I := 0 to Value do
+  for I := 1 to Value do
   begin
     Sum := NumA + NumB;
     NumB := NumA;
