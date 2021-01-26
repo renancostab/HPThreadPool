@@ -33,7 +33,7 @@ type
   TMyJobs = class(TObject)
   private
   public
-    procedure MyFiboWork(AParameters: Pointer);
+    class procedure MyFiboWork(AParameters: Pointer);
   end;
   
 implementation
@@ -73,7 +73,7 @@ begin
   for I := 0 to MAXJOBS - 1 do
   begin
     Fibo[I] := Random(10000);
-    Tasks.Add(THPTask.Run(@MyFiboWork, @Fibo[I]));
+    Tasks.Add(THPTask.Run(@TMyJobs.MyFiboWork, @Fibo[I]));
   end;
   
   THPTask.WaitForAll(Tasks.ToArray);
