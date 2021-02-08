@@ -53,7 +53,7 @@ begin
     Sum := NumA + NumB;
     NumB := NumA;
     NumA := Sum;
-  enbd;
+  end;
   
   PInteger(AParameters)^ := Sum;
 end;
