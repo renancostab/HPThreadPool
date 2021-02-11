@@ -34,7 +34,7 @@
         <PackageName Value="LCL"/>
       </Item2>
     </RequiredPackages>
-    <Units Count="11">
+    <Units Count="10">
       <Unit0>
         <Filename Value="PoolDemo.lpr"/>
         <IsPartOfProject Value="True"/>
@@ -58,40 +58,35 @@
         <UnitName Value="HPCommons"/>
       </Unit3>
       <Unit4>
-        <Filename Value="..\src\hptask.pp"/>
-        <IsPartOfProject Value="True"/>
-        <UnitName Value="HPTask"/>
-      </Unit4>
-      <Unit5>
         <Filename Value="..\src\hptaskapi.pp"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="HPTaskApi"/>
-      </Unit5>
-      <Unit6>
+      </Unit4>
+      <Unit5>
         <Filename Value="..\src\hpthread.pp"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="HPThread"/>
-      </Unit6>
-      <Unit7>
+      </Unit5>
+      <Unit6>
         <Filename Value="..\src\hpthreadpool.pp"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="HPThreadPool"/>
-      </Unit7>
-      <Unit8>
+      </Unit6>
+      <Unit7>
         <Filename Value="..\src\hpwork.pp"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="HPWork"/>
-      </Unit8>
-      <Unit9>
+      </Unit7>
+      <Unit8>
         <Filename Value="..\src\hpworkengine.pp"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="HPWorkEngine"/>
-      </Unit9>
-      <Unit10>
+      </Unit8>
+      <Unit9>
         <Filename Value="..\src\synclist.pp"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="SyncList"/>
-      </Unit10>
+      </Unit9>
     </Units>
   </ProjectOptions>
   <CompilerOptions>
