@@ -67,7 +67,7 @@ var
   Tasks: TTaskList;
 begin
   Randomize;
-  Tasks: TTaskList.Create;
+  Tasks := TTaskList.Create;
   SetLength(Fibo, MAXJOBS);
   
   for I := 0 to MAXJOBS - 1 do
