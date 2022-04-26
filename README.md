@@ -18,6 +18,8 @@ The goal is to provide a nice and simple way to work with threads without the ex
   - Resize of thread pool
   - Zero sleep time when a job is available
   - WaitForAll and WaitForAny
+  - Worker thread class customization (if needed)
+  - OnTerminateWorker callback sync (Synchronized) and async (Thread context)
   
  # Quick Example
  
