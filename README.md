@@ -1,4 +1,4 @@
-![Version](https://img.shields.io/badge/version-v1.0-yellow.svg)
+![Version](https://img.shields.io/badge/version-v1.1-yellow.svg)
 ![License](https://img.shields.io/github/license/renancostab/HPThreadPool.svg)
 ![Lang](https://img.shields.io/github/languages/top/renancostab/HPThreadPool.svg)
 
