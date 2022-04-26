@@ -22,6 +22,7 @@ uses
   HPWorkEngine;
 
 type
+  THPThreadClass = class of THPThread;
 
   { THPThread }
 
@@ -31,6 +32,7 @@ type
     FRunning: PInteger;
     FWaiting: PInteger;
     FWorking: Boolean;
+    FNotify: TNotifyEvent;
 
     procedure IncRunning; inline;
     procedure DecRunning; inline;
@@ -39,7 +41,7 @@ type
   protected
     procedure Execute; override;
   public
-    constructor Create(AWorkEngine: THPWorkEngine; ARunning: PInteger; AWaiting: PInteger);
+    constructor Create(AWorkEngine: THPWorkEngine; ARunning: PInteger; AWaiting: PInteger; ANotify: TNotifyEvent; AUseSync: Boolean);
     property Running: Boolean read FWorking;
   end;
 
@@ -94,10 +96,14 @@ begin
 
     DecRunning;
   end;
+
+  if Assigned(FNotify) then
+    FNotify(Self);
+
   ReturnValue := 0;
 end;
 
-constructor THPThread.Create(AWorkEngine: THPWorkEngine; ARunning: PInteger; AWaiting: PInteger);
+constructor THPThread.Create(AWorkEngine: THPWorkEngine; ARunning: PInteger; AWaiting: PInteger; ANotify: TNotifyEvent; AUseSync: Boolean);
 begin
   inherited Create(False);
   FreeOnTerminate := False;
@@ -105,6 +111,15 @@ begin
   FRunning := ARunning;
   FWaiting := AWaiting;
   FWorking := False;
+
+  // OnTerminate by default handles the event using Synchronize
+  if Assigned(ANotify) then
+  begin
+    if AUseSync then
+      OnTerminate := ANotify
+    else
+      FNotify := ANotify;
+  end;
 end;
 
 end.

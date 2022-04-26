@@ -1,14 +1,14 @@
 object Form1: TForm1
   Left = 837
-  Height = 340
+  Height = 482
   Top = 385
   Width = 523
   Caption = 'High Performance Thread Pool Demo'
-  ClientHeight = 340
+  ClientHeight = 482
   ClientWidth = 523
   OnCreate = FormCreate
   OnDestroy = FormDestroy
-  LCLVersion = '2.0.10.0'
+  LCLVersion = '2.2.0.4'
   object Button1: TButton
     Left = 395
     Height = 25
@@ -71,6 +71,14 @@ object Form1: TForm1
     Caption = 'Wait Any'
     OnClick = Button5Click
     TabOrder = 5
+  end
+  object Memo2: TMemo
+    Left = 8
+    Height = 90
+    Top = 344
+    Width = 374
+    ScrollBars = ssVertical
+    TabOrder = 6
   end
   object Timer1: TTimer
     Enabled = False
