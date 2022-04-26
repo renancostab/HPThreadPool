@@ -26,6 +26,7 @@ type
     Button4: TButton;
     Button5: TButton;
     Memo1: TMemo;
+    Memo2: TMemo;
     Timer1: TTimer;
     procedure Button1Click(Sender: TObject);
     procedure Button2Click(Sender: TObject);
@@ -36,6 +37,7 @@ type
     procedure FormDestroy(Sender: TObject);
     procedure Timer1Timer(Sender: TObject);
   private
+    procedure WorkerTerminate({%H-}ASender: TObject);
   public
     procedure MyWork({%H-}AParameters: Pointer);
   end;
@@ -72,7 +74,6 @@ begin
     Tasks.Add(THPTask.Run(@MyWork, nil));
 
   THPTask.WaitForAll(Tasks.ToArray);
-
   Tasks.Free;
 end;
 
@@ -91,7 +92,6 @@ begin
     Tasks.Add(THPTask.Run(@MyWork, nil));
 
   THPTask.WaitForAny(Tasks.ToArray);
-
   Tasks.Free;
 end;
 
@@ -99,6 +99,8 @@ procedure TForm1.FormCreate(Sender: TObject);
 begin
   Randomize;
   Timer1.Enabled := True;
+  THPThreadPool.DefaultPool.OnTerminateWorker := @WorkerTerminate;
+  THPThreadPool.DefaultPool.UseSyncTerminate := True;
 end;
 
 procedure TForm1.FormDestroy(Sender: TObject);
@@ -124,6 +126,15 @@ begin
   Memo1.Lines.Add('CurrThreads: ' + THPThreadPool.DefaultPool.CurrThreads.ToString());
   Memo1.Lines.Add('MaxThreads.: ' + THPThreadPool.DefaultPool.MaxThreads.ToString());
   Memo1.Lines.Add('MinThreads.: ' + THPThreadPool.DefaultPool.MinThreads.ToString());
+end;
+
+procedure TForm1.WorkerTerminate(ASender: TObject);
+begin
+  // Beware that closing the form will raise an AV if we use GUI and don't handle
+  // the thread concurrency when UseSyncTerminate = False
+
+  // Cleanup code
+  Memo2.Lines.Add('Terminated: ' + TThread(ASender).ThreadID.ToString());
 end;
 
 end.

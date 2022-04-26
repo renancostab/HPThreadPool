@@ -39,8 +39,11 @@ type
 
   THPThreadPool = class(TObject)
   private
+    FNotify: TNotifyEvent;
     FMaxThreads: Integer;
     FMinThreads: Integer;
+    FSyncTerminate: Boolean;
+    FThreadClass: THPThreadClass;
     FWaiting: Integer;
     FRunning: Integer;
     FWorkEngine: THPWorkEngine;
@@ -52,6 +55,9 @@ type
     function GetEnqueued: Integer;
     procedure SetMaxThreads(AValue: Integer);
     procedure SetMinThreads(AValue: Integer);
+    procedure SetNotify(AValue: TNotifyEvent);
+    procedure SetSyncTerminate(AValue: Boolean);
+    procedure SetThreadClass(AValue: THPThreadClass);
     procedure TerminateAllWorkers;
     procedure Grow;
   protected
@@ -67,6 +73,9 @@ type
     property Enqueued: Integer read GetEnqueued;
     property Running: Integer read FRunning;
     property Waiting: Integer read FWaiting;
+    property OnTerminateWorker: TNotifyEvent read FNotify write SetNotify;
+    property UseSyncTerminate: Boolean read FSyncTerminate write SetSyncTerminate;
+    property ThreadClass: THPThreadClass read FThreadClass write SetThreadClass;
 
     class property DefaultPool: THPThreadPool read GetDefault;
   end;
@@ -138,6 +147,24 @@ begin
   FMinThreads := AValue;
 end;
 
+procedure THPThreadPool.SetNotify(AValue: TNotifyEvent);
+begin
+  if FNotify = AValue then Exit;
+  FNotify := AValue;
+end;
+
+procedure THPThreadPool.SetSyncTerminate(AValue: Boolean);
+begin
+  if FSyncTerminate = AValue then Exit;
+  FSyncTerminate := AValue;
+end;
+
+procedure THPThreadPool.SetThreadClass(AValue: THPThreadClass);
+begin
+  if FThreadClass = AValue then Exit;
+  FThreadClass := AValue;
+end;
+
 procedure THPThreadPool.TerminateAllWorkers;
 const
   TIMEOUT = 1000;
@@ -168,7 +195,7 @@ begin
   end;
 
   if (GetEnqueued > 0) and (FWaiting = 0) and (FWorkers.Count < FMaxThreads) then
-    FWorkers.Add(THPThread.Create(FWorkEngine, @FRunning, @FWaiting));
+    FWorkers.Add(FThreadClass.Create(FWorkEngine, @FRunning, @FWaiting, FNotify, FSyncTerminate));
 end;
 
 constructor THPThreadPool.Create;
@@ -177,6 +204,9 @@ begin
   FMinThreads := 1;
   FMaxThreads := TThread.ProcessorCount;
   FWorkEngine := THPWorkEngine.Create;
+  FNotify := nil;
+  FSyncTerminate := False;
+  FThreadClass := THPThread;
 end;
 
 procedure THPThreadPool.AddWork(AWork: TWorkMethod; AParameters: Pointer; ATask: THPTask);

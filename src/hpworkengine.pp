@@ -23,6 +23,7 @@ uses
   HPWork;
 
 type
+
   THPWork = HPWork.THPWork;
 
   { THPWorkEngine }
